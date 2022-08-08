@@ -54,8 +54,8 @@ public class AdminServlet extends HttpServlet {
 
             } else if (action != null && action.equals("edit")) {
 
-                String username = request.getParameter("username");
-                User user = as.get(username);
+                String email = request.getParameter("email");
+                User user = as.get(email);
 
                 request.setAttribute("editUser", user);
                 request.setAttribute("edit", true);
@@ -98,9 +98,11 @@ public class AdminServlet extends HttpServlet {
                 String firstname = request.getParameter("edit_first_name");
                 String lastname = request.getParameter("edit_last_name");
                 String password = request.getParameter("edit_password");
+                boolean active = Boolean.parseBoolean(request.getParameter("edit_active"));
+                int roleId = Integer.parseInt(request.getParameter("edit_roles"));
                 User user = new User();
 
-                as.update(email, true, firstname, lastname, password);
+                as.update(email, active, firstname, lastname, password, roleId);
             }
 
             List<User> users = as.getAll();

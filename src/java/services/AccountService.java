@@ -43,9 +43,12 @@ public class AccountService {
         userDB.insert(user);
     }
     
-    public void update(String email, boolean active, String firstName, String lastName, String password) throws Exception {
+    public void update(String email, boolean active, String firstName, String lastName, String password, int roleId) throws Exception {
+        RoleDB roleDB = new RoleDB();
+        Role role = roleDB.get(roleId);
         UserDB userDB = new UserDB();
         User user = userDB.get(email);
+        user.setRole(role);
         user.setActive(active);
         user.setFirstName(firstName);
         user.setLastName(lastName);

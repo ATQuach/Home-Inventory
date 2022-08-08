@@ -116,11 +116,28 @@
             <div class="editUser">
                 <h2>Edit ${editUser.email}</h2>
                 <form action="admin" method="post">
+                    <input type="hidden" name="edit_email" placeholder="Email" value="${editUser.email}">
+                    <c:choose>
+                        <c:when test="${editUser.active == true}">
+                            <input type="checkbox" name="edit_active" checked="checked" value="true" />
+                        </c:when>
+                        <c:otherwise>
+                            <input type="checkbox" name="edit_active" value="true" />
+                        </c:otherwise>
+                    </c:choose>    
+                    Active
+                    <br>
                     <input type="text" name="edit_first_name" placeholder="First Name" value="${editUser.firstName}">
                     <br>
                     <input type="text" name="edit_last_name" placeholder="Last Name" value="${editUser.lastName}">
                     <br>
                     <input type="password" name="edit_password" placeholder="Password" value="${editUser.password}">
+                    <br>
+                    <select name="edit_roles">
+                        <option value="1" <c:if test="${editUser.role.roleId == 1 }">selected</c:if>>system admin</option>
+                        <option value="2" <c:if test="${editUser.role.roleId == 2 }">selected</c:if>>regular user</option>
+                        <option value="3" <c:if test="${editUser.role.roleId == 3 }">selected</c:if>>company admin</option>
+                    </select>
                     <br>
                     <input type="hidden" name="action" value="edit">
                     <input type="submit" value="Save">
