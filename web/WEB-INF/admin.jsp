@@ -34,7 +34,7 @@
         </style>
     </head>
     <body>
-        <h1>Home Inventory</h1>
+        <h1>Home nVentory</h1>
         <h3>Menu</h3>
         <ul>
             <li><a href=inventory>Inventory</a></li>

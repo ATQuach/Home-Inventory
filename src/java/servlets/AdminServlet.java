@@ -16,11 +16,13 @@ import services.AccountService;
  *
  * @author Andrew
  */
-public class AdminServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet
+{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
 
         AccountService as = new AccountService();
 
@@ -38,21 +40,25 @@ public class AdminServlet extends HttpServlet {
 //            response.sendRedirect("login");
 //            return;
 //        }
-
-        try {
+        try
+        {
             String action = request.getParameter("action");
-            if (action != null && action.equals("delete")) {
+            if (action != null && action.equals("delete"))
+            {
                 String email = request.getParameter("email");
-                if (!emailSession.equals(email)) {
+                if (!emailSession.equals(email))
+                {
                     String message = "User deleted!";
                     request.setAttribute("message", message);
                     as.delete(email);
-                } else {
+                } else
+                {
                     String message = "Cannot delete yourself!";
                     request.setAttribute("message", message);
                 }
 
-            } else if (action != null && action.equals("edit")) {
+            } else if (action != null && action.equals("edit"))
+            {
 
                 String email = request.getParameter("email");
                 User user = as.get(email);
@@ -64,7 +70,8 @@ public class AdminServlet extends HttpServlet {
 
             List<User> users = as.getAll();
             request.setAttribute("users", users);
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             request.setAttribute("message", "No users found");
         }
 
@@ -73,14 +80,17 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
 
         AccountService as = new AccountService();
 
-        try {
+        try
+        {
             String action = request.getParameter("action");
 
-            if (request.getParameter("add_email") != null && !request.getParameter("add_email").equals("") && action.equals("add")) {
+            if (request.getParameter("add_email") != null && !request.getParameter("add_email").equals("") && action.equals("add"))
+            {
                 String message = "User added!";
                 request.setAttribute("message", message);
                 String email = request.getParameter("add_email");
@@ -91,7 +101,9 @@ public class AdminServlet extends HttpServlet {
                 int roleId = Integer.parseInt(request.getParameter("add_roles"));
 
                 as.insert(email, active, firstname, lastname, password, roleId);
-            } else if (action.equals("edit")) {
+            } 
+            else if (action.equals("edit"))
+            {
                 String message = "User saved!";
                 request.setAttribute("message", message);
                 String email = request.getParameter("edit_email");
@@ -100,7 +112,6 @@ public class AdminServlet extends HttpServlet {
                 String password = request.getParameter("edit_password");
                 boolean active = Boolean.parseBoolean(request.getParameter("edit_active"));
                 int roleId = Integer.parseInt(request.getParameter("edit_roles"));
-                User user = new User();
 
                 as.update(email, active, firstname, lastname, password, roleId);
             }
@@ -109,7 +120,8 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("users", users);
             request.setAttribute("add", true);
 
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 

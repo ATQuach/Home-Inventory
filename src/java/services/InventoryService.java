@@ -40,13 +40,17 @@ public class InventoryService {
         itemsDB.insert(item);
     }
 
-    public void update(int itemID, String itemName, double price, Category category, User owner) throws Exception {
+    public void update(int itemID, String itemName, double price, int categoryId, String owner) throws Exception {
         ItemDB itemsDB = new ItemDB();
         Item item = itemsDB.get(itemID);
         item.setItemName(itemName);
         item.setPrice(price);
+        CategoryDB categoryDB = new CategoryDB();
+        Category category = new Category(categoryId);
         item.setCategory(category);
-        item.setOwner(owner);
+        UserDB userDB = new UserDB();
+        User user = userDB.get(owner);
+        item.setOwner(user);
         itemsDB.update(item);
     }
     
