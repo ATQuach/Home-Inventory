@@ -126,5 +126,6 @@ public class AdminServlet extends HttpServlet
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+        return;
     }
 }

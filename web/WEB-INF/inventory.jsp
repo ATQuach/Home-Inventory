@@ -41,6 +41,7 @@
         <ul>
             <li><a href=inventory>Inventory</a></li>
             <li><a href=admin>Admin</a></li>
+            <li><a href=account>Account</a></li>
             <li><a href=login?logout>Logout</a></li>
         </ul>
 
