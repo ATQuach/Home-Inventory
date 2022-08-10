@@ -17,6 +17,9 @@
             <br>
             <input type="submit" value="Log in">
         </form>
+        <form action="register" value="">
+            <input type="submit" value="Register" />
+        </form>
         ${message}
     </body>
 </html>
