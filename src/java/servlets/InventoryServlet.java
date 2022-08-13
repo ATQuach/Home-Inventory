@@ -73,9 +73,8 @@ public class InventoryServlet extends HttpServlet
             }
 
             List<Item> items = is.getAll(email);
-            request.setAttribute("items", items);
-
             List<Category> categories = is.getAllCategories();
+            request.setAttribute("items", items);
             request.setAttribute("categories", categories);
 
         } catch (Exception ex)
@@ -90,9 +89,10 @@ public class InventoryServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-
+        AccountService as = new AccountService();
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
+        
 
         InventoryService is = new InventoryService();
 
@@ -100,6 +100,11 @@ public class InventoryServlet extends HttpServlet
 
         try
         {
+            User user = as.get(email);
+            if (user.getRole().getRoleId() == 1)
+            {
+                request.setAttribute("showAdmin", true);
+            }
             if (action != null && action.equals("add_item"))
             {
                 String categoryId = request.getParameter("categoryList");
@@ -120,12 +125,11 @@ public class InventoryServlet extends HttpServlet
             }
 
             List<Item> items = is.getAll(email);
-            request.setAttribute("items", items);
-
             List<Category> categories = is.getAllCategories();
+            request.setAttribute("items", items);
             request.setAttribute("categories", categories);
-
             request.setAttribute("add", true);
+            
         } catch (Exception ex)
         {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
