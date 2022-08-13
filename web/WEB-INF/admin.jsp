@@ -32,6 +32,7 @@
                 background-color: #dddddd;
             }
         </style>
+        <link rel="stylesheet" href="css/bootstrap.css"></link>
     </head>
     <body>
         <h1>Home nVentory</h1>

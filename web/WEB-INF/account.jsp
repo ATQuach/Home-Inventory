@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Account</title>
+        <link rel="stylesheet" href="css/bootstrap.css"></link>
     </head>
     <body>
         <h1>Home nVentory</h1>
