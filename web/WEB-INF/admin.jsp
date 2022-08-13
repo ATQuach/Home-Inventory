@@ -45,7 +45,7 @@
 
         <h2>Admin Portal (Logged in as ${firstName} ${lastName})</h2>
         <div class="manageUsers">
-            <h3>Manage Users</h3>
+            <h2>Manage Users</h2>
             <table class="usersTable">
                 <tr>
                     <th>Email</th>
@@ -90,7 +90,7 @@
         ${message}
         <c:if test="${addUser == true}">
             <div class="addUser">
-                <h2>Add User</h2>
+                <h3>Add User</h3>
                 <form method="post" action="admin">
                     <input placeholder="Email" type="email" name="add_email">
                     <br>
@@ -116,7 +116,7 @@
 
         <c:if test="${edit == true}">
             <div class="editUser">
-                <h2>Edit ${editUser.email}</h2>
+                <h3>Edit ${editUser.email}</h3>
                 <form action="admin" method="post">
                     <input type="hidden" name="edit_email" placeholder="Email" value="${editUser.email}">
                     <c:choose>
@@ -149,7 +149,7 @@
 
 
         <div class="manageCategories">
-            <h3>Manage Categories</h3>
+            <h2>Manage Categories</h2>
             <table class="categoriesTable">
                 <tr>
                     <th>Category</th>
@@ -171,7 +171,7 @@
         
         <c:if test="${addCategory == true}">
             <div class="addCategory">
-                <h2>Add Category</h2>
+                <h3>Add Category</h3>
                 <form method="post" action="admin">
                     <input placeholder="Category" type="text" name="add_category">
                     <br>

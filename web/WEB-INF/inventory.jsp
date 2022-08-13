@@ -81,7 +81,7 @@
 
         <c:if test="${add == true}">
             <div class="addItem">
-                <h2>Add Item</h2>
+                <h3>Add Item</h3>
                 <form method="post" action="inventory">
                     <label>Category:</label>
                     <select name="categoryList" id="categoryList">

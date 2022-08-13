@@ -7,21 +7,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import services.AccountService;
 
 /**
  *
  * @author Andrew Quach
  */
-public class Register extends HttpServlet
+public class RegisterServlet extends HttpServlet
 {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        
         getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         return;
     }
@@ -45,7 +43,7 @@ public class Register extends HttpServlet
 //                int roleId = Integer.parseInt(request.getParameter("add_roles"));
                 as.insert(email, true, firstname, lastname, password, 2);
             } catch (Exception ex) {
-                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             } 
         

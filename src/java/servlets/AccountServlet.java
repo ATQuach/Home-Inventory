@@ -23,9 +23,15 @@ public class AccountServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+
         try
         {
             HttpSession session = request.getSession();
+            if (session.getAttribute("email") == null)
+            {
+                response.sendRedirect("login");
+                return;
+            }
             String email = (String) session.getAttribute("email");
             request.setAttribute("edit", true);
             AccountService as = new AccountService();
@@ -47,8 +53,7 @@ public class AccountServlet extends HttpServlet
                     as.update(email, false, firstname, lastname, password, roleId);
                     String message2 = "Account deactivated!";
                     request.setAttribute("message2", message2);
-                } 
-                else 
+                } else
                 {
                     String message2 = "Cannot deactivate this account.";
                     request.setAttribute("message2", message2);
