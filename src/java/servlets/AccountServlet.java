@@ -86,7 +86,7 @@ public class AccountServlet extends HttpServlet
                 boolean active = user.getActive();
                 int roleId = user.getRole().getRoleId();
                 as.update(email, active, firstname, lastname, password, roleId);
-                String message = "Account saved!";
+                String message = "Saved! Changes will be made the next time you login!";
                 user = userDB.get(email);
                 request.setAttribute("editUser", user);
                 request.setAttribute("message", message);

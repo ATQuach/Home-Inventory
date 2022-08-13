@@ -6,24 +6,31 @@
         <title>Login</title>
         <link rel="stylesheet" href="css/bootstrap.css"></link>
     </head>
-    <body class="text-center">
+    <body class="container div">
         <main class="form-signin w-199 m-auto">
-        <form method="post" action="login">
-        <h1>Home nVentory</h1>
-        <h2 class="h3 mb-3 fw-normal">Login</h2>
-            <label for="floatingInput">Email:</label>
-            <input type="email" name="email" value="" id="floatingInput" class="form_control" placeholder="name@example.com">
+            <form method="post" action="login">
+                <h1 class="form-control-dark">Home nVentory</h1>
+                <br>
+                <h2>Login</h2>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="formGroupExampleInput" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Type your password">
+                </div>
+                <br>
+
+                <input type="submit" value="Login" class="btn btn-lg btn-primary">
+            </form>
             <br>
-            <label for="floatingInput">Password:</label>
-            <input type="password" name="password" value="" id="floatingInput" class="form_control">
+            <form action="register" value="">
+                <input type="submit" value="Register" class="btn btn-lg btn-primary" />
+            </form>
             <br>
-            <input type="submit" value="Login" class="btn btn-sm btn-secondary">
-        </form>
-        <form action="register" value="">
-            <input type="submit" value="Register" class="btn btn-sm btn-secondary" />
-        </form>
-        ${message}
-        </div>
+            ${message}
+            </div>
         </main>
     </body>
 </html>

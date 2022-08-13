@@ -34,6 +34,9 @@ public class AdminServlet extends HttpServlet
         request.setAttribute("addUser", true);
         request.setAttribute("addCategory", true);
 
+        request.setAttribute("show_manage_users", true);
+        request.setAttribute("show_manage_categories", false);
+
         HttpSession session = request.getSession();
         String emailSession = (String) session.getAttribute("email");
         try
@@ -42,7 +45,7 @@ public class AdminServlet extends HttpServlet
             if (user.getRole().getRoleId() != 1)
             {
                 response.sendRedirect("login");
-            } else 
+            } else
             {
                 request.setAttribute("showAdmin", true);
             }
@@ -50,7 +53,6 @@ public class AdminServlet extends HttpServlet
         {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
 //        try {
 //            if (!name.equals("admin") && !name.equals("admin2")) {
@@ -61,7 +63,6 @@ public class AdminServlet extends HttpServlet
 //            response.sendRedirect("login");
 //            return;
 //        }
-        
         try
         {
             String action = request.getParameter("action");
@@ -79,7 +80,8 @@ public class AdminServlet extends HttpServlet
                     String message = "Cannot delete yourself!";
                     request.setAttribute("message", message);
                 }
-
+                request.setAttribute("show_manage_users", true);
+                request.setAttribute("show_manage_categories", false);
             } else if (action != null && action.equals("edit"))
             {
                 String email = request.getParameter("email");
@@ -88,6 +90,8 @@ public class AdminServlet extends HttpServlet
                 request.setAttribute("editUser", user);
                 request.setAttribute("edit", true);
                 request.setAttribute("addUser", false);
+                request.setAttribute("show_manage_users", true);
+                request.setAttribute("show_manage_categories", false);
 
             } else if (action != null && action.equals("edit_category"))
             {
@@ -97,6 +101,16 @@ public class AdminServlet extends HttpServlet
                 request.setAttribute("editCategory", category);
                 request.setAttribute("editCate", true);
                 request.setAttribute("addCategory", false);
+                request.setAttribute("show_manage_users", false);
+                request.setAttribute("show_manage_categories", true);
+            } else if (action != null && action.equals("manageUsers"))
+            {
+                request.setAttribute("show_manage_users", true);
+                request.setAttribute("show_manage_categories", false);
+            } else if (action != null && action.equals("manageCategories"))
+            {
+                request.setAttribute("show_manage_users", false);
+                request.setAttribute("show_manage_categories", true);
             }
 
             List<User> users = as.getAll();
@@ -137,6 +151,9 @@ public class AdminServlet extends HttpServlet
                 int roleId = Integer.parseInt(request.getParameter("add_roles"));
 
                 as.insert(email, active, firstname, lastname, password, roleId);
+
+                request.setAttribute("show_manage_users", true);
+                request.setAttribute("show_manage_categories", false);
             } else if (action.equals("edit"))
             {
                 String message = "User saved!";
@@ -149,6 +166,9 @@ public class AdminServlet extends HttpServlet
                 int roleId = Integer.parseInt(request.getParameter("edit_roles"));
 
                 as.update(email, active, firstname, lastname, password, roleId);
+
+                request.setAttribute("show_manage_users", true);
+                request.setAttribute("show_manage_categories", false);
             } else if (action.equals("addCategory"))
             {
                 String message2 = "Category added!";
@@ -156,14 +176,18 @@ public class AdminServlet extends HttpServlet
                 String category = request.getParameter("add_category");
 
                 cs.insert(category);
+                request.setAttribute("show_manage_users", false);
+                request.setAttribute("show_manage_categories", true);
             } else if (action.equals("editCategory"))
             {
                 String message2 = "Category saved!";
                 request.setAttribute("message2", message2);
                 int categoryID = Integer.parseInt(request.getParameter("edit_category_id"));
                 String categoryName = request.getParameter("edit_category");
-                
+
                 cs.update(categoryID, categoryName);
+                request.setAttribute("show_manage_users", false);
+                request.setAttribute("show_manage_categories", true);
             }
 
             List<User> users = as.getAll();
@@ -172,7 +196,7 @@ public class AdminServlet extends HttpServlet
             request.setAttribute("categories", categories);
             request.setAttribute("addUser", true);
             request.setAttribute("addCategory", true);
-            
+
         } catch (Exception ex)
         {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
