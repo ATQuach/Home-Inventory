@@ -30,6 +30,10 @@ public class AccountServlet extends HttpServlet
             request.setAttribute("edit", true);
             AccountService as = new AccountService();
             User user = as.get(email);
+            if (user.getRole().getRoleId() == 1)
+            {
+                request.setAttribute("showAdmin", true);
+            }
             request.setAttribute("editUser", user);
             String action = request.getParameter("action");
             if (action != null && action.equals("deactivate"))
@@ -38,9 +42,17 @@ public class AccountServlet extends HttpServlet
                 String lastname = user.getLastName();
                 String password = user.getPassword();
                 int roleId = user.getRole().getRoleId();
-                as.update(email, false, firstname, lastname, password, roleId);
-                String message2 = "Account deactivated!";
-                request.setAttribute("message2", message2);
+                if (roleId != 1)
+                {
+                    as.update(email, false, firstname, lastname, password, roleId);
+                    String message2 = "Account deactivated!";
+                    request.setAttribute("message2", message2);
+                } 
+                else 
+                {
+                    String message2 = "Cannot deactivate this account.";
+                    request.setAttribute("message2", message2);
+                }
             }
             getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
             return;

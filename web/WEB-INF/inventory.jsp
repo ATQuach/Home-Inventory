@@ -40,7 +40,9 @@
         <h3>Menu</h3>
         <ul>
             <li><a href=inventory>Inventory</a></li>
+            <c:if test="${showAdmin == true}">
             <li><a href=admin>Admin</a></li>
+            </c:if>
             <li><a href=account>Account</a></li>
             <li><a href=login?logout>Logout</a></li>
         </ul>

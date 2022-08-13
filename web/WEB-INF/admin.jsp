@@ -43,15 +43,16 @@
             <li><a href=login?logout>Logout</a></li>
         </ul>
 
+        <h2>Admin Portal (Logged in as ${firstName} ${lastName})</h2>
         <div class="manageUsers">
-            <h2>Manage Users</h2>
+            <h3>Manage Users</h3>
             <table class="usersTable">
                 <tr>
                     <th>Email</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Active</th>
                     <th>Role</th>
+                    <th>Active</th>
                     <th>Delete</th>
                     <th>Edit</th>
                 </tr>
@@ -60,6 +61,7 @@
                         <td>${user.email}</td>
                         <td>${user.firstName}</td>
                         <td>${user.lastName}</td>
+                        <td>${user.role.roleName}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${user.active}">
@@ -70,7 +72,6 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td>${user.role.roleName}</td>
                         <c:url value="/admin" var="deleteurl">
                             <c:param name="action" value="delete"/>
                             <c:param name="email" value="${user.email}"/>
@@ -85,9 +86,9 @@
                 </c:forEach>
             </table>
         </div>
-        <br>
+
         ${message}
-        <c:if test="${add == true}">
+        <c:if test="${addUser == true}">
             <div class="addUser">
                 <h2>Add User</h2>
                 <form method="post" action="admin">
@@ -138,9 +139,56 @@
                         <option value="1" <c:if test="${editUser.role.roleId == 1 }">selected</c:if>>system admin</option>
                         <option value="2" <c:if test="${editUser.role.roleId == 2 }">selected</c:if>>regular user</option>
                         <option value="3" <c:if test="${editUser.role.roleId == 3 }">selected</c:if>>company admin</option>
-                    </select>
+                        </select>
+                        <br>
+                        <input type="hidden" name="action" value="edit">
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+        </c:if>
+
+
+        <div class="manageCategories">
+            <h3>Manage Categories</h3>
+            <table class="categoriesTable">
+                <tr>
+                    <th>Category</th>
+                    <th>Edit</th>
+                </tr>
+                <c:forEach var="category" items="${categories}">
+                    <tr>
+                        <td>${category.categoryName}</td>                
+                        <c:url value="/admin" var="editurl">
+                            <c:param name="action" value="edit_category"/>
+                            <c:param name="categoryId" value="${category.categoryId}"/>
+                        </c:url>
+                        <td><a href="${editurl}"><input type="button" name="edit_button" value="Edit"></a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        ${message2}
+        
+        <c:if test="${addCategory == true}">
+            <div class="addCategory">
+                <h2>Add Category</h2>
+                <form method="post" action="admin">
+                    <input placeholder="Category" type="text" name="add_category">
                     <br>
-                    <input type="hidden" name="action" value="edit">
+                    <input type="hidden" name="action" value="addCategory">
+                    <input type="submit" value="Save">
+                </form>
+            </div>
+        </c:if>
+
+        <c:if test="${editCate == true}">
+            <div class="editCategory">
+                <h2>Edit Category</h2>
+                <form method="post" action="admin">
+                    <input type="hidden" name="edit_category_id" placeholder="CategoryID" value="${editCategory.categoryId}">
+                    <input placeholder="Category" type="text" name="edit_category" value="${editCategory.categoryName}">
+                    <br>
+                    <input type="hidden" name="action" value="editCategory">
                     <input type="submit" value="Save">
                 </form>
             </div>

@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet
             }
 
             User user = as.login(email, password);
-            if (user != null)
+            if (user != null && user.getActive() == true)
             {
                 String firstName = user.getFirstName();
                 String lastName = user.getLastName();
@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet
                 }
             } else
             {
-                String message = "Username does not match password.";
+                String message = "Email does not match password.";
                 request.setAttribute("message", message);
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return;

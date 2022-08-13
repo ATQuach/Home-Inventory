@@ -9,69 +9,88 @@ import models.User;
  *
  * @author Andrew Quach
  */
-public class UserDB {
-    
-    public List<User> getAll() throws Exception {
+public class UserDB
+{
+
+    public List<User> getAll() throws Exception
+    {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
+        try
+        {
             List<User> userList = em.createNamedQuery("User.findAll", User.class).getResultList();
             return userList;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public User get(String email) throws Exception {
+    public User get(String email) throws Exception
+    {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
+        try
+        {
             User user = em.find(User.class, email);
             return user;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public void insert(User user) throws Exception {
+    public void insert(User user) throws Exception
+    {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction et = em.getTransaction();
-        
-        try {
+
+        try
+        {
             et.begin();
             em.persist(user);
             et.commit();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             et.rollback();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public void update(User user) throws Exception {
+    public void update(User user) throws Exception
+    {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction et = em.getTransaction();
-        try {
+        try
+        {
             et.begin();
             em.merge(user);
             et.commit();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             et.rollback();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public void delete(User user) throws Exception {
+    public void delete(User user) throws Exception
+    {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction et = em.getTransaction();
-        try {
+        try
+        {
             et.begin();
             em.remove(em.merge(user));
             et.commit();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             et.rollback();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
-    
+
 }

@@ -17,7 +17,7 @@ import services.InventoryService;
 
 /**
  *
- * @author Andrew
+ * @author Andrew Quach
  */
 public class InventoryServlet extends HttpServlet
 {
@@ -32,6 +32,18 @@ public class InventoryServlet extends HttpServlet
         AccountService as = new AccountService();
         String email = (String) session.getAttribute("email");
         request.setAttribute("add", true);
+
+        try
+        {
+            User user = as.get(email);
+            if (user.getRole().getRoleId() == 1)
+            {
+                request.setAttribute("showAdmin", true);
+            }
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (session.getAttribute("email") == null)
         {
@@ -95,12 +107,11 @@ public class InventoryServlet extends HttpServlet
                 String itemPrice = request.getParameter("add_item_price");
                 is.insert(itemName, Integer.parseInt(itemPrice), Integer.parseInt(categoryId), email);
                 request.setAttribute("message", "Added item.");
-            }
-            else if (action != null && action.equals("edit_item"))
+            } else if (action != null && action.equals("edit_item"))
             {
                 String message = "Item saved!";
                 request.setAttribute("message", message);
-                
+
                 int itemId = Integer.parseInt(request.getParameter("edit_item_id"));
                 int category = Integer.parseInt(request.getParameter("edit_category"));
                 String name = request.getParameter("edit_item_name");
@@ -113,7 +124,7 @@ public class InventoryServlet extends HttpServlet
 
             List<Category> categories = is.getAllCategories();
             request.setAttribute("categories", categories);
-            
+
             request.setAttribute("add", true);
         } catch (Exception ex)
         {

@@ -17,14 +17,17 @@
         <h3>Menu</h3>
         <ul>
             <li><a href=inventory>Inventory</a></li>
+            <c:if test="${showAdmin == true}">
             <li><a href=admin>Admin</a></li>
+            </c:if>
             <li><a href=account>Account</a></li>
             <li><a href=login?logout>Logout</a></li>
         </ul>
         
     <c:if test="${edit == true}">
         <div class="editUser">
-            <h2>Edit ${editUser.email}</h2>
+            <h2>${editUser.email}</h2>
+            <h3>Edit Account</h3>
             <form action="account" method="post">
                 <input type="hidden" name="edit_email" placeholder="Email" value="${editUser.email}">
                 <label>First Name:</label>

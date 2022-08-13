@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Category;
 import models.User;
 import services.AccountService;
+import services.CategoryService;
+import services.InventoryService;
 
 /**
  *
@@ -25,11 +28,29 @@ public class AdminServlet extends HttpServlet
     {
 
         AccountService as = new AccountService();
+        InventoryService is = new InventoryService();
+        CategoryService cs = new CategoryService();
 
-        request.setAttribute("add", true);
+        request.setAttribute("addUser", true);
+        request.setAttribute("addCategory", true);
 
         HttpSession session = request.getSession();
         String emailSession = (String) session.getAttribute("email");
+        try
+        {
+            User user = as.get(emailSession);
+            if (user.getRole().getRoleId() != 1)
+            {
+                response.sendRedirect("login");
+            } else 
+            {
+                request.setAttribute("showAdmin", true);
+            }
+        } catch (Exception ex)
+        {
+            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
 //        try {
 //            if (!name.equals("admin") && !name.equals("admin2")) {
@@ -40,9 +61,11 @@ public class AdminServlet extends HttpServlet
 //            response.sendRedirect("login");
 //            return;
 //        }
+        
         try
         {
             String action = request.getParameter("action");
+
             if (action != null && action.equals("delete"))
             {
                 String email = request.getParameter("email");
@@ -59,23 +82,34 @@ public class AdminServlet extends HttpServlet
 
             } else if (action != null && action.equals("edit"))
             {
-
                 String email = request.getParameter("email");
                 User user = as.get(email);
 
                 request.setAttribute("editUser", user);
                 request.setAttribute("edit", true);
-                request.setAttribute("add", false);
+                request.setAttribute("addUser", false);
+
+            } else if (action != null && action.equals("edit_category"))
+            {
+                int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                Category category = cs.get(categoryId);
+
+                request.setAttribute("editCategory", category);
+                request.setAttribute("editCate", true);
+                request.setAttribute("addCategory", false);
             }
 
             List<User> users = as.getAll();
             request.setAttribute("users", users);
+            List<Category> categories = is.getAllCategories();
+            request.setAttribute("categories", categories);
         } catch (Exception e)
         {
             request.setAttribute("message", "No users found");
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+        return;
     }
 
     @Override
@@ -84,6 +118,8 @@ public class AdminServlet extends HttpServlet
     {
 
         AccountService as = new AccountService();
+        InventoryService is = new InventoryService();
+        CategoryService cs = new CategoryService();
 
         try
         {
@@ -101,8 +137,7 @@ public class AdminServlet extends HttpServlet
                 int roleId = Integer.parseInt(request.getParameter("add_roles"));
 
                 as.insert(email, active, firstname, lastname, password, roleId);
-            } 
-            else if (action.equals("edit"))
+            } else if (action.equals("edit"))
             {
                 String message = "User saved!";
                 request.setAttribute("message", message);
@@ -114,12 +149,30 @@ public class AdminServlet extends HttpServlet
                 int roleId = Integer.parseInt(request.getParameter("edit_roles"));
 
                 as.update(email, active, firstname, lastname, password, roleId);
+            } else if (action.equals("addCategory"))
+            {
+                String message2 = "Category added!";
+                request.setAttribute("message2", message2);
+                String category = request.getParameter("add_category");
+
+                cs.insert(category);
+            } else if (action.equals("editCategory"))
+            {
+                String message2 = "Category saved!";
+                request.setAttribute("message2", message2);
+                int categoryID = Integer.parseInt(request.getParameter("edit_category_id"));
+                String categoryName = request.getParameter("edit_category");
+                
+                cs.update(categoryID, categoryName);
             }
 
             List<User> users = as.getAll();
+            List<Category> categories = is.getAllCategories();
             request.setAttribute("users", users);
-            request.setAttribute("add", true);
-
+            request.setAttribute("categories", categories);
+            request.setAttribute("addUser", true);
+            request.setAttribute("addCategory", true);
+            
         } catch (Exception ex)
         {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
