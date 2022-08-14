@@ -27,11 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "role")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries(
+{
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
     , @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId")
-    , @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
-public class Role implements Serializable {
+    , @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")
+})
+public class Role implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,65 +47,79 @@ public class Role implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
     private List<User> userList;
 
-    public Role() {
+    public Role()
+    {
     }
 
-    public Role(Integer roleId) {
+    public Role(Integer roleId)
+    {
         this.roleId = roleId;
     }
 
-    public Role(Integer roleId, String roleName) {
+    public Role(Integer roleId, String roleName)
+    {
         this.roleId = roleId;
         this.roleName = roleName;
     }
 
-    public Integer getRoleId() {
+    public Integer getRoleId()
+    {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Integer roleId)
+    {
         this.roleId = roleId;
     }
 
-    public String getRoleName() {
+    public String getRoleName()
+    {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(String roleName)
+    {
         this.roleName = roleName;
     }
 
     @XmlTransient
-    public List<User> getUserList() {
+    public List<User> getUserList()
+    {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(List<User> userList)
+    {
         this.userList = userList;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
         hash += (roleId != null ? roleId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof Role))
+        {
             return false;
         }
         Role other = (Role) object;
-        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
+        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "models.Role[ roleId=" + roleId + " ]";
     }
     

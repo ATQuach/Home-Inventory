@@ -27,12 +27,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "item")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries(
+{
     @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
     , @NamedQuery(name = "Item.findByItemId", query = "SELECT i FROM Item i WHERE i.itemId = :itemId")
     , @NamedQuery(name = "Item.findByItemName", query = "SELECT i FROM Item i WHERE i.itemName = :itemName")
-    , @NamedQuery(name = "Item.findByPrice", query = "SELECT i FROM Item i WHERE i.price = :price")})
-public class Item implements Serializable {
+    , @NamedQuery(name = "Item.findByPrice", query = "SELECT i FROM Item i WHERE i.price = :price")
+})
+public class Item implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,81 +56,99 @@ public class Item implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User owner;
 
-    public Item() {
+    public Item()
+    {
     }
 
-    public Item(Integer itemId) {
+    public Item(Integer itemId)
+    {
         this.itemId = itemId;
     }
 
-    public Item(Integer itemId, String itemName, double price) {
+    public Item(Integer itemId, String itemName, double price)
+    {
         this.itemId = itemId;
         this.itemName = itemName;
         this.price = price;
     }
 
-    public Integer getItemId() {
+    public Integer getItemId()
+    {
         return itemId;
     }
 
-    public void setItemId(Integer itemId) {
+    public void setItemId(Integer itemId)
+    {
         this.itemId = itemId;
     }
 
-    public String getItemName() {
+    public String getItemName()
+    {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
+    public void setItemName(String itemName)
+    {
         this.itemName = itemName;
     }
 
-    public double getPrice() {
+    public double getPrice()
+    {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double price)
+    {
         this.price = price;
     }
 
-    public Category getCategory() {
+    public Category getCategory()
+    {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(Category category)
+    {
         this.category = category;
     }
 
-    public User getOwner() {
+    public User getOwner()
+    {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(User owner)
+    {
         this.owner = owner;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
         hash += (itemId != null ? itemId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Item)) {
+        if (!(object instanceof Item))
+        {
             return false;
         }
         Item other = (Item) object;
-        if ((this.itemId == null && other.itemId != null) || (this.itemId != null && !this.itemId.equals(other.itemId))) {
+        if ((this.itemId == null && other.itemId != null) || (this.itemId != null && !this.itemId.equals(other.itemId)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "models.Item[ itemId=" + itemId + " ]";
     }
     

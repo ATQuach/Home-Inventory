@@ -3,6 +3,7 @@ package services;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -24,6 +25,7 @@ public class GmailService
     /* Send a templated Email */
     public static void sendMail(String to, String subject, String template, HashMap<String, String> tags) throws Exception
     {
+        System.out.println(template);
         // {{firstname}} -> Anne
         // {{date}} -> Oct. 28
         String body = "";
@@ -45,7 +47,7 @@ public class GmailService
                 body = body.replace("{{" + key + "}}", tags.get(key));
             }
 
-        } catch (Exception e)
+        } catch (IOException e)
         {
             Logger.getLogger(GmailService.class.getName()).log(Level.SEVERE, null, e);
         }

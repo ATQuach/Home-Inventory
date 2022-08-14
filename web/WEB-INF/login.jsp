@@ -21,7 +21,8 @@
                     <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Type your password">
                 </div>
                 <br>
-
+                <a href="reset">Forgot password?</a>
+                <br><br>
                 <input type="submit" value="Login" class="btn btn-lg btn-primary">
             </form>
             <br>
