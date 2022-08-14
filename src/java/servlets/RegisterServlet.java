@@ -33,15 +33,21 @@ public class RegisterServlet extends HttpServlet
         if (request.getParameter("add_email") != null && !request.getParameter("add_email").equals("") && action.equals("Submit"))
             {
             try {
-                String message = "Account Created!";
-                request.setAttribute("message", message);
                 String email = request.getParameter("add_email");
                 String password = request.getParameter("add_password");
                 String firstname = request.getParameter("add_first_name");
                 String lastname = request.getParameter("add_last_name");
-//                boolean active = Boolean.parseBoolean(request.getParameter("add_active"));
-//                int roleId = Integer.parseInt(request.getParameter("add_roles"));
-                as.insert(email, true, firstname, lastname, password, 2);
+                if (as.insertNewUser(email, true, firstname, lastname, password, 2))
+                {
+                    String message = "Account Created!";
+                    request.setAttribute("message", message);
+                }
+                else
+                {
+                    String message = "Email already exists in the system. Please login.";
+                    request.setAttribute("message", message);
+                }
+                
             } catch (Exception ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

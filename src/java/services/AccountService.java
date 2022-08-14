@@ -53,6 +53,25 @@ public class AccountService
         userDB.insert(user);
     }
 
+    public boolean insertNewUser(String email, boolean active, String firstName, String lastName, String password, int roleId) throws Exception
+    {
+        UserDB userDB = new UserDB();
+        User user = userDB.get(email);
+        if (user == null)
+        {
+            User newUser = new User(email, active, firstName, lastName, password);
+            RoleDB roleDB = new RoleDB();
+            Role role = roleDB.get(roleId);
+            newUser.setRole(role);
+            userDB.insert(newUser);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     public void update(String email, boolean active, String firstName, String lastName, String password, int roleId) throws Exception
     {
         RoleDB roleDB = new RoleDB();
