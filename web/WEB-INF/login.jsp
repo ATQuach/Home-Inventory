@@ -23,11 +23,11 @@
                 <br>
                 <a href="reset">Forgot password?</a>
                 <br><br>
-                <input type="submit" value="Login" class="btn btn-lg btn-primary">
+                <input type="submit" value="Login" class="btn btn-lg btn-outline-primary">
             </form>
             <br>
             <form action="register" value="">
-                <input type="submit" value="Register" class="btn btn-lg btn-primary" />
+                <input type="submit" value="Register" class="btn btn-lg btn-outline-primary" />
             </form>
             <br>
             ${message}

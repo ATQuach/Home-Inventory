@@ -88,12 +88,12 @@
                                     <c:param name="action" value="delete"/>
                                     <c:param name="email" value="${user.email}"/>
                                 </c:url>                     
-                                <td><a href="${deleteurl}"><input type="button" name="delete_button" value="Delete" class="btn btn-primary"></a></td>
+                                <td><a href="${deleteurl}"><input type="button" name="delete_button" value="Delete" class="btn btn-outline-primary"></a></td>
                                         <c:url value="/admin" var="editurl">
                                             <c:param name="action" value="edit"/>
                                             <c:param name="email" value="${user.email}"/>
                                         </c:url>
-                                <td><a href="${editurl}"><input type="button" name="edit_button" value="Edit" class="btn btn-primary"></a></td>
+                                <td><a href="${editurl}"><input type="button" name="edit_button" value="Edit" class="btn btn-outline-primary"></a></td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -122,7 +122,7 @@
                                 </select>
                                 <br>
                                 <input type="hidden" name="action" value="add">
-                                <input type="submit" value="Save" class="btn btn-primary">
+                                <input type="submit" value="Save" class="btn btn-outline-primary">
                             </form>
                         </div>
                     </c:if>
@@ -157,7 +157,7 @@
                                     </select>
                                     <br>
                                     <input type="hidden" name="action" value="edit">
-                                    <input type="submit" value="Save" class="btn btn-primary">
+                                    <input type="submit" value="Save" class="btn btn-outline-primary">
                                 </form>
 
                             </div>
@@ -186,7 +186,7 @@
                                         <c:param name="action" value="edit_category"/>
                                         <c:param name="categoryId" value="${category.categoryId}"/>
                                     </c:url>
-                                    <td><a href="${editurl}"><input type="button" name="edit_button" value="Edit" class="btn btn-primary"></a></td>
+                                    <td><a href="${editurl}"><input type="button" name="edit_button" value="Edit" class="btn btn-outline-primary"></a></td>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -201,7 +201,7 @@
                                     <input class="form-control" placeholder="Category" type="text" name="add_category">
                                     <br>
                                     <input type="hidden" name="action" value="addCategory">
-                                    <input type="submit" value="Save" class="btn btn-primary">
+                                    <input type="submit" value="Save" class="btn btn-outline-primary">
                                 </form>
                             </div>
                         </c:if>
@@ -215,7 +215,7 @@
                                     <input class="form-control" placeholder="Category" type="text" name="edit_category" value="${editCategory.categoryName}">
                                     <br>
                                     <input type="hidden" name="action" value="editCategory">
-                                    <input type="submit" value="Save" class="btn btn-primary">
+                                    <input type="submit" value="Save" class="btn btn-outline-primary">
                                 </form>
                             </div>
                         </c:if>

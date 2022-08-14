@@ -32,10 +32,12 @@
                     <input type="text" class="form-control" placeholder="Last Name" name="add_last_name">
                     <label>Last Name</label>
                 </div>
-                <input type="submit" name="action" value="Submit" class="btn btn-lg btn-primary">
+                <input type="submit" name="action" value="Submit" class="btn btn-lg btn-outline-primary">
                 <br>
                 <br>
-                <button onclick="location.href = 'login'" type="button" class="btn btn-lg btn-primary">Back</button>
+                <button onclick="location.href = 'login'" type="button" class="btn btn-lg btn-outline-primary">Back</button>
+                <br>
+                <br>
             </form>
             ${message}
         </main>

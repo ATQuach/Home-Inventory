@@ -50,7 +50,7 @@
                     <input class="form-control" type="password" name="edit_password" placeholder="Password" value="${editUser.password}">
                     <br>
                     <input type="hidden" name="action" value="edit">
-                    <input type="submit" value="Save" class="btn btn-primary">
+                    <input type="submit" value="Save" class="btn btn-outline-primary">
                 </form>
                 ${message}
                 <br>
@@ -60,7 +60,7 @@
                     <c:param name="email" value="${editUser.email}"/>
                 </c:url>
                 <br>
-                <a href="${editurl}"><input type="button" name="deactivate" value="Deactivate Account" class="btn btn-primary"></a>
+                <a href="${editurl}"><input type="button" name="deactivate" value="Deactivate Account" class="btn btn-outline-danger"></a>
                 <br>
                 <br>
                 ${message2}

@@ -17,10 +17,10 @@
                 </div>
                 <br>
                 <input type="hidden" name="reset" value="reset">
-                <input type="submit" value="Submit" class="btn btn-lg btn-primary">
+                <input type="submit" value="Submit" class="btn btn-lg btn-outline-primary">
                 <br>
                 <br>
-                <button onclick="location.href = 'login'" type="button" class="btn btn-lg btn-primary">Back</button
+                <button onclick="location.href = 'login'" type="button" class="btn btn-lg btn-outline-primary">Back</button
                 <br>
                 <br>
                 <br>
